@@ -9,13 +9,13 @@ import javax.persistence.*;
 @Entity
 @DynamicInsert
 @DynamicUpdate
-@Table(name = "ALUNO")
-public class Aluno {
+@Table(name = "TURMA")
+public class Turma {
 
     @NotNull
     @Id
-    @Column(name = "ALUNO_UID")
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "TURMA_UID")
     private Long uniqueID;
 
     @NotNull
@@ -23,15 +23,15 @@ public class Aluno {
     private String nome;
 
     @NotNull
-    @Column(name = "IDADE")
-    private Integer idade;
+    @Column(name = "PROFESSOR")
+    private String professor;
 
-    public Aluno() {
+    public Turma() {
     }
 
-    public Aluno(String nome, Integer idade) {
+    public Turma(String nome, String professor) {
         this.nome = nome;
-        this.idade = idade;
+        this.professor = professor;
     }
 
     public Long getUniqueID() {
@@ -50,11 +50,11 @@ public class Aluno {
         this.nome = nome;
     }
 
-    public Integer getIdade() {
-        return idade;
+    public String getProfessor() {
+        return professor;
     }
 
-    public void setIdade(Integer idade) {
-        this.idade = idade;
+    public void setProfessor(String professor) {
+        this.professor = professor;
     }
 }

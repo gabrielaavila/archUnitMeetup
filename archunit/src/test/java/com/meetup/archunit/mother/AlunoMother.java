@@ -9,18 +9,13 @@ public class AlunoMother {
     }
 
     public static Aluno getAluno() {
-        Aluno aluno = new Aluno();
+        Aluno aluno = new Aluno("Francisco", 12);
         aluno.setUniqueID(1L);
-        aluno.setNome("Francisco");
-        aluno.setIdade(12);
         return aluno;
     }
 
     public static AlunoRequest getAlunoRequest() {
-        AlunoRequest aluno = new AlunoRequest();
-        aluno.setNome("Francisco");
-        aluno.setIdade(12);
-        return aluno;
+        return new AlunoRequest("Francisco", 12);
     }
 
 }

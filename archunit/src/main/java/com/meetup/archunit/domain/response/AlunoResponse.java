@@ -15,6 +15,15 @@ public class AlunoResponse {
     @ApiModelProperty(value = "Idade do aluno")
     private Integer idade;
 
+    public AlunoResponse() {
+    }
+
+    public AlunoResponse(Long uniqueID, String nome, Integer idade) {
+        this.uniqueID = uniqueID;
+        this.nome = nome;
+        this.idade = idade;
+    }
+
     public Long getUniqueID() {
         return uniqueID;
     }

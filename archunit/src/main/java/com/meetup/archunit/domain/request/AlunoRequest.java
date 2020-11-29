@@ -14,6 +14,14 @@ public class AlunoRequest {
     @ApiModelProperty(value = "idade do aluno")
     private Integer idade;
 
+    public AlunoRequest() {
+    }
+
+    public AlunoRequest(String nome, Integer idade) {
+        this.nome = nome;
+        this.idade = idade;
+    }
+
     public String getNome() {
         return nome;
     }

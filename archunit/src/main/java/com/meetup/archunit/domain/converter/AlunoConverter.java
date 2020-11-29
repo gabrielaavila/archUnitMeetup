@@ -16,21 +16,14 @@ public class AlunoConverter {
         if (isNull(request)) {
             return new Aluno();
         }
-        Aluno aluno = new Aluno();
-        aluno.setNome(request.getNome());
-        aluno.setIdade(request.getIdade());
-        return aluno;
+        return new Aluno(request.getNome(), request.getIdade());
     }
 
     public static AlunoResponse toResponse(Aluno aluno) {
         if (isNull(aluno)) {
             return new AlunoResponse();
         }
-        AlunoResponse response = new AlunoResponse();
-        response.setUniqueID(aluno.getUniqueID());
-        response.setNome(aluno.getNome());
-        response.setIdade(aluno.getIdade());
-        return response;
+        return new AlunoResponse(aluno.getUniqueID(), aluno.getNome(), aluno.getIdade());
     }
 
 
