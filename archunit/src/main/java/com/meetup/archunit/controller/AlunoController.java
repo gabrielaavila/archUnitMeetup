@@ -75,12 +75,15 @@ public class AlunoController {
     @GetMapping(value = "/aluno/media/{id}", produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<AlunoMediaResponse> getMediasAluno(@PathVariable("id") Long alunoId, @Param("turmaId") Long turmaId){
 
-        List<Avaliacao> avaliacao = avaliacaoRepository.findAllByAlunoUniqueIDAndTurmaUniqueID(alunoId, turmaId);
+        List<Avaliacao> avaliacoes = avaliacaoRepository.findAllByAlunoUniqueIDAndTurmaUniqueID(alunoId, turmaId);
+        
+        return ResponseEntity.ok(new AlunoMediaResponse(calcularMediaDeNotasDeAvaliacao(avaliacoes)));
+    }
 
-        Double nota = avaliacao.stream()
+    private double calcularMediaDeNotasDeAvaliacao(List<Avaliacao> avaliacoes) {
+        double nota = avaliacoes.stream()
                 .map(Avaliacao::getNota)
                 .reduce(0.0, Double::sum);
-        nota = nota / avaliacao.size();
-        return ResponseEntity.ok(new AlunoMediaResponse(nota));
+        return nota / avaliacoes.size();
     }
 }
