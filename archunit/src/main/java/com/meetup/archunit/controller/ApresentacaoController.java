@@ -1,6 +1,5 @@
 package com.meetup.archunit.controller;
 
-import com.meetup.archunit.domain.request.AlunoRequest;
 import com.meetup.archunit.domain.response.ApresentacaoResponse;
 import com.meetup.archunit.entity.Aluno;
 import com.meetup.archunit.entity.Avaliacao;
@@ -14,7 +13,6 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
@@ -43,7 +41,7 @@ public class ApresentacaoController {
 
     @ApiOperation(value = "Popula o banco de dados para apresentacao")
     @PostMapping(value = "/apresentacao", produces = APPLICATION_JSON_VALUE)
-    public ResponseEntity<ApresentacaoResponse> createAluno(@RequestBody AlunoRequest alunoRequest) {
+    public ResponseEntity<ApresentacaoResponse> populateDatabase() {
 
         List<Aluno> alunosCriados = criaAluno();
         Turma turmaCriada = criaTurma();
