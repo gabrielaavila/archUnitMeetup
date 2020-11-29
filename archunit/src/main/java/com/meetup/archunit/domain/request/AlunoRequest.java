@@ -12,6 +12,7 @@ public class AlunoRequest {
     private String nome;
 
     @ApiModelProperty(value = "idade do aluno")
+    @NotNull
     private Integer idade;
 
     public AlunoRequest() {

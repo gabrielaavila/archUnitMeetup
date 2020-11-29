@@ -89,6 +89,6 @@ public class ApresentacaoController {
     }
 
     private double getRandomValue(Random random) {
-        return (random.nextInt(1000)/100);
+        return (random.nextInt(1000)/100.0);
     }
 }

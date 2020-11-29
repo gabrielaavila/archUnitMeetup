@@ -4,22 +4,16 @@ import com.meetup.archunit.domain.request.AlunoRequest;
 import com.meetup.archunit.domain.response.AlunoListResponse;
 import com.meetup.archunit.domain.response.AlunoMediaResponse;
 import com.meetup.archunit.domain.response.AlunoResponse;
-import com.meetup.archunit.entity.Aluno;
-import com.meetup.archunit.entity.Avaliacao;
-import com.meetup.archunit.repository.AlunoRepository;
-import com.meetup.archunit.repository.AvaliacaoRepository;
-import com.meetup.archunit.repository.TurmaAlunoRepository;
+import com.meetup.archunit.service.AlunoService;
 import io.swagger.annotations.ApiOperation;
+import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.Optional;
-
-import static com.meetup.archunit.domain.converter.AlunoConverter.*;
-import static org.springframework.http.HttpStatus.*;
+import static org.springframework.http.HttpStatus.CREATED;
+import static org.springframework.http.HttpStatus.OK;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 
 
@@ -27,63 +21,45 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 public class AlunoController {
 
     @Autowired
-    private AlunoRepository alunoRepository;
-
-    @Autowired
-    private AvaliacaoRepository avaliacaoRepository;
-
-    @Autowired
-    private TurmaAlunoRepository turmaAlunoRepository;
+    private AlunoService alunoService;
 
     @ApiOperation(value = "Cria um novo aluno no banco de dados")
     @PostMapping(value = "/aluno", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<AlunoResponse> createAluno(@RequestBody AlunoRequest alunoRequest) {
-        Aluno savedAluno = alunoRepository.save(toEntity(alunoRequest));
-
-        return new ResponseEntity<>(toResponse(savedAluno), CREATED);
+        return new ResponseEntity<>(alunoService.createAluno(alunoRequest), CREATED);
     }
 
     @ApiOperation(value = "Retorna dados do aluno cadastrado com o id informado")
     @GetMapping(value = "/aluno/{id}", produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<AlunoResponse> getAlunoById(@PathVariable("id") Long id) {
-        Optional<Aluno> retrievedAluno = alunoRepository.findById(id);
 
-        return retrievedAluno
-                .map(aluno -> new ResponseEntity<>(toResponse(aluno), OK))
-                .orElseGet(() -> new ResponseEntity<>(NOT_FOUND));
+        try {
+            return new ResponseEntity<>(alunoService.getById(id), OK);
+        } catch (NotFoundException e) {
+            e.printStackTrace();
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @ApiOperation(value = "Retorna a lista de alunos cadastrados no banco de dados")
     @GetMapping(value = "/aluno", produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<AlunoListResponse> getAlunos() {
-        List<Aluno> retrievedAluno = alunoRepository.findAll();
-        AlunoListResponse response = new AlunoListResponse();
-        response.setAlunos(toResponseList(retrievedAluno));
 
-        return new ResponseEntity<>(response, OK);
+        return new ResponseEntity<>(new AlunoListResponse(alunoService.getAll()), OK);
     }
 
     @ApiOperation(value = "Deleta o aluno cadastrado com o id informado")
     @DeleteMapping(value = "/aluno/{id}", produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<AlunoResponse> deleteAluno(@PathVariable("id") Long id) {
 
-        alunoRepository.deleteById(id);
-
+        alunoService.deleteById(id);
         return new ResponseEntity<>(OK);
     }
 
     @GetMapping(value = "/aluno/media/{id}", produces = APPLICATION_JSON_VALUE)
-    public ResponseEntity<AlunoMediaResponse> getMediasAluno(@PathVariable("id") Long alunoId, @Param("turmaId") Long turmaId){
+    public ResponseEntity<AlunoMediaResponse> getMediasAluno(@PathVariable("id") Long alunoId,
+                                                             @Param("turmaId") Long turmaId){
 
-        List<Avaliacao> avaliacoes = avaliacaoRepository.findAllByAlunoUniqueIDAndTurmaUniqueID(alunoId, turmaId);
-        
-        return ResponseEntity.ok(new AlunoMediaResponse(calcularMediaDeNotasDeAvaliacao(avaliacoes)));
-    }
-
-    private double calcularMediaDeNotasDeAvaliacao(List<Avaliacao> avaliacoes) {
-        double nota = avaliacoes.stream()
-                .map(Avaliacao::getNota)
-                .reduce(0.0, Double::sum);
-        return nota / avaliacoes.size();
+        return ResponseEntity.ok(new AlunoMediaResponse(alunoService.getMediadeNotasDeAvaliacaoPorTurma(alunoId, turmaId)));
     }
 }

@@ -9,8 +9,12 @@ public class TurmaMediaResponse {
     @ApiModelProperty("Aluno com a maior media")
     private AlunoResponse aluno;
 
-    public TurmaMediaResponse(AlunoResponse alunoResponse){
-        this.aluno = alunoResponse;
+    @ApiModelProperty("Media de todas as avaliacoes do aluno na turma")
+    private double media;
+
+    public TurmaMediaResponse(AlunoResponse aluno, double media) {
+        this.aluno = aluno;
+        this.media = media;
     }
 
     public AlunoResponse getAluno() {
@@ -19,5 +23,13 @@ public class TurmaMediaResponse {
 
     public void setAluno(AlunoResponse aluno) {
         this.aluno = aluno;
+    }
+
+    public double getMedia() {
+        return media;
+    }
+
+    public void setMedia(double media) {
+        this.media = media;
     }
 }

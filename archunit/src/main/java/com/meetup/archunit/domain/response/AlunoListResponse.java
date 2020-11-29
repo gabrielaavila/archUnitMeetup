@@ -12,6 +12,10 @@ public class AlunoListResponse {
     @ApiModelProperty(value = "lista de alunos")
     private List<AlunoResponse> alunos;
 
+    public AlunoListResponse(List<AlunoResponse> alunos) {
+        this.alunos = alunos;
+    }
+
     public List<AlunoResponse> getAlunos() {
         return alunos;
     }
