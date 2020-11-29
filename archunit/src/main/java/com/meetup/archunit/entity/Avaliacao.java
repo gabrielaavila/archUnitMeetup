@@ -36,7 +36,7 @@ public class Avaliacao {
 
     @NotNull
     @JoinColumn(name = "ALUNO_UID", referencedColumnName = "ALUNO_UID")
-    @ManyToOne(fetch =FetchType.EAGER)
+    @ManyToOne(fetch =FetchType.LAZY)
     private Aluno aluno;
 
     public Avaliacao() {
