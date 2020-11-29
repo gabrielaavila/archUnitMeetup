@@ -11,4 +11,5 @@ public interface AvaliacaoRepository extends JpaRepository<Avaliacao, Long> {
 
     List<Avaliacao> findAllByAlunoUniqueIDAndTurmaUniqueID(Long alunoUniqueID, Long turmaUniqueID);
 
+    List<Avaliacao> findAllByTurmaUniqueID(Long turmaUniqueID);
 }
