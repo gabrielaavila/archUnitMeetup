@@ -33,7 +33,7 @@ public class AlunoController {
     }
 
     @ApiOperation(value = "Retorna dados do aluno cadastrado com o id informado")
-    @GetMapping(value = "/aluno/{id}", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/aluno/{id}", produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<AlunoResponse> getAlunoById(@PathVariable("id") Long id) {
         Optional<Aluno> retrievedAluno = alunoRepository.findById(id);
 
@@ -43,7 +43,7 @@ public class AlunoController {
     }
 
     @ApiOperation(value = "Retorna a lista de alunos cadastrados no banco de dados")
-    @GetMapping(value = "/aluno", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/aluno", produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<AlunoListResponse> getAlunos() {
         List<Aluno> retrievedAluno = alunoRepository.findAll();
         AlunoListResponse response = new AlunoListResponse();
@@ -53,7 +53,7 @@ public class AlunoController {
     }
 
     @ApiOperation(value = "Deleta o aluno cadastrado com o id informado")
-    @DeleteMapping(value = "/aluno/{id}", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
+    @DeleteMapping(value = "/aluno/{id}", produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<AlunoResponse> deleteAluno(@PathVariable("id") Long id) {
 
         alunoRepository.deleteById(id);

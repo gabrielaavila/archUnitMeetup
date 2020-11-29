@@ -42,7 +42,7 @@ public class ApresentacaoController {
     private AvaliacaoRepository avaliacaoRepository;
 
     @ApiOperation(value = "Popula o banco de dados para apresentacao")
-    @PostMapping(value = "/apresentacao", consumes = APPLICATION_JSON_VALUE, produces = APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/apresentacao", produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<ApresentacaoResponse> createAluno(@RequestBody AlunoRequest alunoRequest) {
 
         List<Aluno> alunosCriados = criaAluno();
