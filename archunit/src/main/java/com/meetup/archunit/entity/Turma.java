@@ -34,6 +34,12 @@ public class Turma {
         this.professor = professor;
     }
 
+    public Turma(Long uniqueID, String nome, String professor) {
+        this.uniqueID = uniqueID;
+        this.nome = nome;
+        this.professor = professor;
+    }
+
     public Long getUniqueID() {
         return uniqueID;
     }
