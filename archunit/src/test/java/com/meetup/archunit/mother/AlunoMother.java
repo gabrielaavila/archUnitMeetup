@@ -1,6 +1,7 @@
 package com.meetup.archunit.mother;
 
 import com.meetup.archunit.domain.request.AlunoRequest;
+import com.meetup.archunit.domain.response.AlunoResponse;
 import com.meetup.archunit.entity.Aluno;
 
 public class AlunoMother {
@@ -18,4 +19,7 @@ public class AlunoMother {
         return new AlunoRequest("Francisco", 12);
     }
 
+    public static AlunoResponse getAlunoResponse() {
+        return new AlunoResponse(1L, "Francisco", 12);
+    }
 }

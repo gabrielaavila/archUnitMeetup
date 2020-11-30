@@ -15,6 +15,8 @@ import java.util.List;
 import java.util.Optional;
 
 import static com.meetup.archunit.domain.converter.AlunoConverter.*;
+import static java.lang.String.format;
+import static org.springframework.util.CollectionUtils.isEmpty;
 
 @Service
 @Transactional
@@ -49,8 +51,12 @@ public class AlunoService {
         alunoRepository.deleteById(id);
     }
 
-    public double getMediadeNotasDeAvaliacaoPorTurma(Long alunoId, Long turmaId) {
+    public double getMediadeNotasDeAvaliacaoPorTurma(Long alunoId, Long turmaId) throws NotFoundException {
         List<AvaliacaoDto> avaliacoes = avaliacaoService.getAllAvaliacoesPorAlunoETurma(alunoId, turmaId);
+
+        if (isEmpty(avaliacoes)){
+            throw new NotFoundException(format("Nao existem avaliacoes para o aluno [%s] e a turma [%s]", alunoId, turmaId));
+        }
 
         return calcularMediaDeAvaliacoesDeAluno(avaliacoes);
     }

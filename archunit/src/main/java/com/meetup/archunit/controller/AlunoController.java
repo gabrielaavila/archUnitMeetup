@@ -59,7 +59,11 @@ public class AlunoController {
     @GetMapping(value = "/aluno/media/{id}", produces = APPLICATION_JSON_VALUE)
     public ResponseEntity<AlunoMediaResponse> getMediasAluno(@PathVariable("id") Long alunoId,
                                                              @Param("turmaId") Long turmaId){
-
-        return ResponseEntity.ok(new AlunoMediaResponse(alunoService.getMediadeNotasDeAvaliacaoPorTurma(alunoId, turmaId)));
+        try {
+            return ResponseEntity.ok(new AlunoMediaResponse(alunoService.getMediadeNotasDeAvaliacaoPorTurma(alunoId, turmaId)));
+        } catch (NotFoundException e) {
+            e.printStackTrace();
+            return ResponseEntity.notFound().build();
+        }
     }
 }

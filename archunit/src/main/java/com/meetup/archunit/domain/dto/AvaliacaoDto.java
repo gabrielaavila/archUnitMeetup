@@ -11,6 +11,9 @@ public class AvaliacaoDto {
     private Long turmaId;
     private AlunoResponse aluno;
 
+    public AvaliacaoDto() {
+    }
+
     public AvaliacaoDto(Long uniqueID, Tipos tipo, double nota, Long turmaId, AlunoResponse aluno) {
         this.uniqueID = uniqueID;
         this.tipo = tipo;
