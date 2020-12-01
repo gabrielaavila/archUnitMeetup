@@ -4,6 +4,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.meetup.archunit.domain.request.AlunoRequest;
 import com.meetup.archunit.entity.Aluno;
 import com.meetup.archunit.repository.AlunoRepository;
+import com.meetup.archunit.repository.AvaliacaoRepository;
+import com.meetup.archunit.repository.TurmaAlunoRepository;
+import com.meetup.archunit.repository.TurmaRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -38,6 +41,15 @@ public class AlunoControllerTest {
 
     @MockBean
     private AlunoRepository alunoRepository;
+
+    @MockBean
+    private AvaliacaoRepository avaliacaoRepository;
+
+    @MockBean
+    private TurmaAlunoRepository turmaAlunoRepository;
+
+    @MockBean
+    private TurmaRepository turmaRepository;
 
     ObjectMapper objectMapper = new ObjectMapper();
 
