@@ -4,6 +4,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.meetup.archunit.domain.request.AlunoRequest;
 import com.meetup.archunit.entity.Aluno;
 import com.meetup.archunit.repository.AlunoRepository;
+import com.meetup.archunit.repository.AvaliacaoRepository;
+import com.meetup.archunit.repository.TurmaAlunoRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -27,7 +29,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @AutoConfigureMockMvc
-@WebMvcTest
+@WebMvcTest(controllers = {AlunoController.class})
 public class AlunoControllerTest {
 
     @Autowired
@@ -38,6 +40,12 @@ public class AlunoControllerTest {
 
     @MockBean
     private AlunoRepository alunoRepository;
+
+    @MockBean
+    private AvaliacaoRepository avaliacaoRepository;
+
+    @MockBean
+    private TurmaAlunoRepository turmaAlunoRepository;
 
     ObjectMapper objectMapper = new ObjectMapper();
 
