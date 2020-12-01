@@ -27,7 +27,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @AutoConfigureMockMvc
-@WebMvcTest
+@WebMvcTest(controllers = {AlunoController.class})
 public class AlunoControllerTest {
 
     @Autowired
