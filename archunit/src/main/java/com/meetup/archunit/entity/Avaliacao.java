@@ -31,7 +31,7 @@ public class Avaliacao {
 
     @NotNull
     @JoinColumn(name = "TURMA_UID", referencedColumnName = "TURMA_UID")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Turma turma;
 
     @NotNull

@@ -10,7 +10,7 @@ import javax.persistence.*;
 @DynamicInsert
 @DynamicUpdate
 @Table(name = "ALUNO")
-public class Aluno {
+public class Aluno extends BaseEntity{
 
     @NotNull
     @Id

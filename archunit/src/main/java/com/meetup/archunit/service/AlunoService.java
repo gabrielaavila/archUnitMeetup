@@ -47,6 +47,10 @@ public class AlunoService {
         return toResponseList(retrievedAluno);
     }
 
+    public Aluno getAllAlunos(){
+        return alunoRepository.findAll().get(0);
+    }
+
     public void deleteById(Long id) {
         alunoRepository.deleteById(id);
     }
