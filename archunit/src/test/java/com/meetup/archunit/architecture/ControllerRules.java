@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 public class ControllerRules extends BaseRule{
 
   @Test
-  void classesNameTest(){
+  void classesNameMustEndInController(){
     classes()
         .that()
         .resideInAnyPackage(CONTROLLER_PACKAGE)
@@ -24,7 +24,7 @@ public class ControllerRules extends BaseRule{
   }
 
   @Test
-  void methodsMustBeAnnotateWithApiOperation() {
+  void methodsMustBeAnnotatedWithApiOperation() {
     //noMethods()
     methods()
         .that()
