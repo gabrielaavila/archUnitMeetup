@@ -24,6 +24,9 @@ public class ApresentacaoResponse {
     @ApiModelProperty("Lista de relacionamentos Turma - Aluno")
     private List<TurmaAluno> turmaAlunoList;
 
+    public ApresentacaoResponse() {
+    }
+
     public ApresentacaoResponse(List<Aluno> alunos, Turma turma, List<Avaliacao> avaliacoes, List<TurmaAluno> turmaAlunoList) {
         this.alunos = alunos;
         this.turma = turma;

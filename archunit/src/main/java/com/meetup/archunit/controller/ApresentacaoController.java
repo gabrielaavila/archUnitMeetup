@@ -52,6 +52,16 @@ public class ApresentacaoController {
                 CREATED);
     }
 
+    @ApiOperation(value = "Popula o banco de dados apenas com alunos para apresentacao")
+    @PostMapping(value = "/apresentacao/alunos", produces = APPLICATION_JSON_VALUE)
+    public ResponseEntity<ApresentacaoResponse> populateDatabaseAlunos() {
+
+        List<Aluno> alunosCriados = criaAluno();
+        ApresentacaoResponse response = new ApresentacaoResponse();
+        response.setAlunos(alunosCriados);
+        return new ResponseEntity<>(response, CREATED);
+    }
+
     private List<Aluno> criaAluno() {
         List<Aluno> alunos = new ArrayList<>();
 
